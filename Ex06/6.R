@@ -1,7 +1,4 @@
 
-
-
-
 set.seed(1681)
 
 inicio <- 4
@@ -13,11 +10,21 @@ n3 <- 59
 
 pop <- 290
 
-unif1 <- runif(n1, inicio, fim)
-unif2 <- runif(n2, inicio, fim)
-unif3 <- runif(n3, inicio, fim)
+dadosN1<- c()
+dadosN2<- c()
+dadosN3<- c()
 
+for(i in 1:pop) { 
+  dadosN1[i] <- mean(runif(n1, inicio, fim)) 
+}
 
+for(i in 1:pop) { 
+  dadosN2[i] <- mean(runif(n2, inicio, fim)) 
+}
+
+for(i in 1:pop) { 
+  dadosN3[i] <- mean(runif(n3, inicio, fim)) 
+}
 
 
 media1 <- mean(unif1)
@@ -28,8 +35,14 @@ p <- ggplot(dados, aes(x = Valor, fill= Regiao)) +
   geom_histogram(binwidth = 10 , alpha=0.5)
 
 
-ggplot() + aes(unif1)+ geom_histogram(binwidth=0.5, colour="black", fill="white")
 
-ggplot() + aes(unif2)+ geom_histogram(binwidth=0.5, colour="black", fill="white")
+ggplot() + aes(dadosN1)+ geom_histogram(aes(y = after_stat(count / sum(count))),colour="black", fill="white") +
+  xlim(inicio, fim) + scale_y_continuous(labels = scales::percent) #+
+ # stat_function(fun = dnorm, args = list((inicio+fim)/2), sqrt(((fim-inicio)**2)/(12*n1)))
 
-ggplot() + aes(unif3)+ geom_histogram(binwidth=0.5, colour="black", fill="white")
+ggplot() + aes(dadosN2)+ geom_histogram(aes(y = after_stat(count / sum(count))),colour="black", fill="white") + 
+  xlim(inicio, fim) + scale_y_continuous(labels = scales::percent)
+
+ggplot() + aes(dadosN3)+ geom_histogram(aes(y = after_stat(count / sum(count))),colour="black", fill="white") + 
+  xlim(inicio, fim) + scale_y_continuous(labels = scales::percent)
+
