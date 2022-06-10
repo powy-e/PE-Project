@@ -37,8 +37,8 @@ p <- ggplot(dados, aes(x = Valor, fill= Regiao)) +
 
 
 ggplot() + aes(dadosN1)+ geom_histogram(aes(y = after_stat(count / sum(count))),colour="black", fill="white") +
-  xlim(inicio, fim) + scale_y_continuous(labels = scales::percent) #+
- # stat_function(fun = dnorm, args = list((inicio+fim)/2), sqrt(((fim-inicio)**2)/(12*n1)))
+  xlim(inicio, fim) + scale_y_continuous(labels = scales::percent) +
+  stat_function(fun = dnorm, args = list((min(dadosN1)+max(dadosN1))/2,  (sd(dadosN1)/sqrt(n1))))
 
 ggplot() + aes(dadosN2)+ geom_histogram(aes(y = after_stat(count / sum(count))),colour="black", fill="white") + 
   xlim(inicio, fim) + scale_y_continuous(labels = scales::percent)
