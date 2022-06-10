@@ -1,4 +1,5 @@
 
+rr <- Sys.time()
 set.seed(835)
 
 n_amostras <- 750
@@ -17,7 +18,7 @@ for (j in 1:25) {
   amostrasN <- c()
   amostrasNC <- c()
   for (i in 1:n_amostras) {
-    amostrasN[i]<- 2*(sd(rexp(100*j*(1-contaminar), 0.35)) * nivel_confianca / sqrt(100*j*contaminar))
+    amostrasN[i]<- 2*(sd(rexp(100*j*(1-contaminar), 0.35)) * nivel_confianca / sqrt(100*j*(1-contaminar)))
     amostrasNC[i]<- 2*(sd(rexp(100*j*contaminar, 0.02)) * nivel_confianca / sqrt(100*j*contaminar))
   }
   valor_n[j] = (100*j)
@@ -32,3 +33,6 @@ p <- ggplot(dados, aes(x = N, y = value, color = variable)) +
   geom_point() +
   theme_light()
 
+
+
+print(Sys.time() - rr)
