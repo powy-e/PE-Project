@@ -25,11 +25,12 @@ colnames(dadosMulheres) <- c("UK - F", "ES - F", "FI - F", "Ano")
 dadosMulheres <- melt(dadosMulheres,id = c("Ano"))
 
 
-dadosTotais <- rbind(dadosMulheres, dadosHomens) 
+dadosTotais <- rbind(dadosMulheres, dadosHomens) %>% filter(value != 0)
 colnames(dadosTotais)<-c("Ano", "Pais", "EMV")
 
 p <- ggplot(dadosTotais, aes(x = Ano, y = EMV, color= Pais)) +
-  geom_line()
+  geom_line() +
+  theme_light()
 
   
 
