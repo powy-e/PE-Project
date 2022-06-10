@@ -24,7 +24,7 @@ dadosExcel <- dadosExcel %>%
 colnames(dadosExcel) <- c("País", "Ano", "Resíduos")
 
 # Fazer o Gráfico de Barras
-p <- ggplot(dadosExcel, aes(x = País, y = Resíduos, fill = Ano)) +
+ggplot(dadosExcel, aes(x = País, y = Resíduos, fill = Ano)) +
     geom_bar(stat = "Identity", position = position_dodge()) +
     geom_text(aes(label = Resíduos),
         vjust = 2.5, size = 4, color = "white",
@@ -32,7 +32,5 @@ p <- ggplot(dadosExcel, aes(x = País, y = Resíduos, fill = Ano)) +
     ) +
     labs(title=" Produção de resíduos per capita") +
     ylab("Resíduos (t)") +
-    scale_fill_brewer(palette = "Paired") +
-    theme_minimal()
+    scale_fill_brewer(palette = "Paired")
 
-p
