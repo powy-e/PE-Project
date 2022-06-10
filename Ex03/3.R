@@ -13,5 +13,6 @@ colnames(dados) <- c("Regiao", "Valor")
 
 dados$Valor <- as.numeric(dados$Valor)
 
-p <- ggplot(dados, aes(x = Valor, fill= Regiao)) +
-  geom_histogram(binwidth = 10 , alpha=0.5)
+p <- ggplot(dados, aes(x = Valor, fill= Regiao, fill= Regiao)) +
+  geom_histogram(binwidth = 20 , alpha=0.5)
+p
