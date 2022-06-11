@@ -13,7 +13,7 @@ for (i in 1:n_amostras) {
 sum <- 0
 
 for (i in 0:48){
-  sum = sum + ( i * dbinom(i, 48, 0.53))
+  sum <-sum + ( i * dbinom(i, 48, 0.53))
 }
 
 result <- abs(mean(amostras) - sum)

@@ -24,7 +24,7 @@ for (j in 1:50) {
 
 dados <- data.frame(N = valor_n, MA = mediaAmostrasN)
 
-p <- ggplot(dados, aes(x = valor_n, y = mediaAmostrasN)) +
-  geom_line() +
+p <- ggplot(dados, aes(x = N, y = MA)) +
+  geom_point() +
   theme_light()
 

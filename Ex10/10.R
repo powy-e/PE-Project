@@ -1,5 +1,4 @@
 
-rr <- Sys.time()
 set.seed(835)
 
 n_amostras <- 750
@@ -32,11 +31,5 @@ for (j in 1:25) {
 
 dados <- data.frame(N = valor_n, MA = mediaAmostrasN, MAC = mediaAmostrasNC) %>% melt(id = "N")
 
-p <- ggplot(dados, aes(x = N, y = value, color = variable)) +
-  geom_point() +
-  theme_light()
-
-
-
-print(Sys.time() - rr)
-
+ggplot(dados, aes(x = N, y = value, color = variable)) +
+  geom_point()
