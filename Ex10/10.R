@@ -1,28 +1,22 @@
+library("ggplot2"); library("dplyr"); library("reshape2")
 
-set.seed(484)
+set.seed(835)
+n_amostras <- 750
 
-n_amostras <- 550
+contaminar <- 0.25                # % a contaminar
 
-# dimensao das amostras varia entre [100, 2.500] em incrementos de 100
-# 100n , n[1:25]
-
-contaminar <- 0.25
-
-lambda <- 0.28
-lambda_c <- 0.17
+lambda <- 0.35
+lambda_c <- 0.02
   
-nivel_confianca <- 0.92
+nivel_confianca <- 0.93
 alpha <- (1-nivel_confianca)
 
-qnt_dnorm <- qnorm(1-alpha/2)
+qnt_dnorm <- qnorm(1-alpha/2)     # Quantis de Distribuição Normal
 
-mediaAmostrasN <- c()
-mediaAmostrasNC <- c()
+mediaAmostrasN <- c(); mediaAmostrasNC <- c()
 valor_n <- c()
-
 for (j in 1:25) {
-  amostrasN <- c()
-  amostrasNC <- c()
+  amostrasN <- c(); amostrasNC <- c()               # Amostra Contaminada
   dimensao <- 100*j
   for (i in 1:n_amostras) {
     descontaminados <- rexp(dimensao, lambda)
@@ -36,8 +30,12 @@ for (j in 1:25) {
   mediaAmostrasNC[j] <- mean(amostrasNC)
 }
 
-
 dados <- data.frame(N = valor_n, MA = mediaAmostrasN, MAC = mediaAmostrasNC) %>% melt(id = "N")
 
 ggplot(dados, aes(x = N, y = value, color = variable)) +
-  geom_point()
+  geom_point() +
+  labs(title = "Média da amplitude dos IC em função da dimensão da amostra (n)",
+       subtitle = expression("com/sem contaminação por distribuição que modela outliers"),
+       y = "Média da Amplitude dos IC", x = "Tamanho da Amostra (n)") +
+  scale_color_discrete(name = "Contaminação", labels = c("MA(n) - Descontaminada", "MAc(n) - Contaminada")) +
+  theme(plot.subtitle=element_text(size=10, hjust=0.03, color="#808080"))
